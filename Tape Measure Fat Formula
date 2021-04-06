@@ -1,0 +1,85 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Lab3_Kou_Moua
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+
+        // thigh is waist and forearms is calf
+        private void btnCalculate_Click(object sender, EventArgs e)
+        {
+            float weight, waist, hips, forearm, wrist, PercentFat, Fat, Lean, IdealWeight;
+            float.TryParse(txtWeight.Text, out weight);
+            float.TryParse(txtWaist.Text, out waist);
+            float.TryParse(txtHips.Text, out hips);
+            float.TryParse(txtForearm.Text, out forearm);
+            float.TryParse(txtWrist.Text, out wrist);
+
+            if (rdo30Under.Checked == true)
+            {
+                if (rdoMale.Checked == true)
+                {
+                    PercentFat = (waist + (hips / 2) - ((forearm * 3) - wrist));
+                }
+                else//females
+                {
+                    PercentFat = (hips + (8 * (waist / 10)) - (2 * forearm) - wrist);
+                }
+
+            }
+
+            else//over thirty
+            {
+                if (rdoMale.Checked == true)
+                {
+                    PercentFat = (waist + (hips / 2) - (27 * (forearm / 10)) - wrist);
+                }
+                else //female
+                {
+                    PercentFat = (hips + waist - (2 * forearm) - wrist);
+                }
+
+            }
+
+            Fat = ((PercentFat / 100) * weight);
+            Lean = (weight - Fat);
+            IdealWeight = (Lean * 100) / (78);
+
+            lblOutput.Text = "You have about " + Lean + " lbs of lean body weight with about "
+                + Fat + " lbs of body fat ( " + PercentFat + " %). You should weigh no more than " + IdealWeight + " lbs. " +
+                "This being no more than 15% fat for males, and 22% fat for females."; 
+
+
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            rdoMale.Checked = true;
+            rdo30Under.Checked = true;
+            txtWeight.Text = "";
+            txtWaist.Text = "";
+            txtHips.Text = "";
+            txtForearm.Text = "";
+            txtWrist.Text = "";
+            lblOutput.Text = "";
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+    }
