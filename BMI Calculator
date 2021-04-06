@@ -1,0 +1,88 @@
+#include <stdio.h> 
+#include <string.h> //header files
+#pragma warning(disable:4996) //disable unnecessary security feature
+
+float obtainWeight() //prompts the user and returns a weight input by the user
+{
+	float weight = 0;
+	printf("Enter the person's weight in pounds: ");
+	scanf("%f", &weight);
+	while (weight <= 0)
+	{
+		printf("A weight cannot be negative or zero. Enter a different weight value: ");
+		scanf("%f", &weight);
+	}
+	return weight;
+}
+
+float obtainHeight() //prompts the user and returns a height input by the user
+{
+	float height = 0;
+	printf("Enter the person's height in inches: ");
+	scanf("%f", &height);
+	while (height <= 0)
+	{
+		printf("A height cannot be negative or zero. Enter a different height value: ");
+		scanf("%f", &height);
+	}
+	return height;
+}
+
+float calculateBMI(float weight, float height) //calculates the BMI from a given weight and height
+{
+	float bmi = weight * 703 / (height * height);
+	return bmi;
+}
+
+void displayBMIProfile(char name[], float weight, float height, float bmi) //displays the BMI profile from a given name, weight, height, and BMI
+{
+	//print name
+	printf("%s's BMI profile:\n", name);
+
+	//print and format weight
+	if (weight == (int)weight)
+		printf("Weight: %d lbs.\n", (int)weight);
+	else
+		printf("Weight: %4.2f lbs.\n", weight);
+	
+	//print and format height
+	if (height == (int)height)
+		printf("Height: %d in.\n", (int)height);
+	else
+		printf("Height: %4.2f in.\n", height);
+
+	//print BMI
+	printf("BMI: %4.2f\n", bmi);
+}
+
+int main()
+{
+	//initialize variables
+	char name[20] = "", endCondition[20] = "";
+	float height = 0, weight = 0;
+
+	//obtain the first person's name and set up the end condition variable
+	printf("Welcome to the BMI Calculator!\n\nEnter the person's first name or enter exit to quit the program: ");
+	scanf("%s", name);
+	strcpy(endCondition, name);
+
+	//loop program while the user has not input exit
+	while (strcmp(strupr(endCondition), "EXIT"))
+	{
+		//obtain the height and the weight
+		weight = obtainWeight();
+		height = obtainHeight();
+
+		//print the person's BMI profile using their height, weight, and name
+		printf("\n");
+		displayBMIProfile(name, weight, height, calculateBMI(weight, height));
+
+		//obtain the next person's first name and set up the end condition variable
+		printf("\nEnter the person's first name or enter exit to quit the program: ");
+		scanf("%s", name);
+		strcpy(endCondition, name);
+	}
+
+	//end the main function
+	return 0;
+}
