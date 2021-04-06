@@ -1,0 +1,119 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Lab5_Kou_Moua
+{
+    public partial class Form1 : Form
+    {
+        float r1, r2, r3, v1, v2, v3, i1, v;
+
+        private void txtBoxR3_TextChanged(object sender, EventArgs e)
+        {
+            Calculate();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txtBoxR2_TextChanged(object sender, EventArgs e)
+        {
+            Calculate();
+        }
+
+        private void txtBoxR1_TextChanged(object sender, EventArgs e)
+        {
+            Calculate();
+        }
+
+        private void chkBoxRemoveR3_CheckedChanged(object sender, EventArgs e)
+        {
+            Calculate();
+            if (chkBoxRemoveR3.Checked == true)
+            {
+                picBoxCircuit2.Visible = true;
+                picBoxCircuit1.Visible = false;
+                lblR3.Visible = false;
+                txtBoxR3.Visible = false;
+                lblV3.Visible = false;
+                lblV3Output.Visible = false;
+            }
+            else
+            {
+                picBoxCircuit2.Visible = false;
+                picBoxCircuit1.Visible = true;
+                lblR3.Visible = true;
+                txtBoxR3.Visible = true;
+                lblV3.Visible = true;
+                lblV3Output.Visible = true;
+            }
+        }
+
+        private void trkVolts_Scroll(object sender, EventArgs e)
+        {
+            lblVoltsOutput.Text = trkVolts.Value.ToString();
+            Calculate();
+        }
+
+        public Form1()
+        {
+            InitializeComponent();
+            lblVoltsOutput.Text = "4";
+        }
+
+        public void Calculate()
+        {
+            if (chkBoxRemoveR3.Checked == true)
+            {
+                float.TryParse(txtBoxR1.Text, out r1);
+                float.TryParse(txtBoxR2.Text, out r2);
+
+                v = int.Parse(lblVoltsOutput.Text);
+                i1 = v / (r1 + r2);
+                v1 = i1 * r1;
+                v2 = i1 * r2;
+
+
+                lblV1Output.Text = v1.ToString("##.00");
+                lblV2Output.Text = v2.ToString("##.00");
+                lblIValue.Text = i1.ToString("##.0000");
+            }
+            else
+            {
+                float.TryParse(txtBoxR1.Text, out r1);
+                float.TryParse(txtBoxR2.Text, out r2);
+                float.TryParse(txtBoxR3.Text, out r3);
+                float resistunder1;
+                resistunder1 = (1 / (r1 + r2)) + (1 / r3);
+                float resistadd;
+                resistadd = 1 / resistunder1;
+                i1 = v / resistadd;
+                v = int.Parse(lblVoltsOutput.Text);
+                v1 = v * (r1 / (r1 + r2));
+                v2 = v * (r2 / (r1 + r2));
+                v3 = v;
+
+
+
+                lblV1Output.Text = v1.ToString("##.00");
+                lblV2Output.Text = v2.ToString("##.00");
+                lblV3Output.Text = v3.ToString("##.00");
+                lblIValue.Text = i1.ToString("##.####");
+            }
+        }
+
+        private void btnCalculate_Click(object sender, EventArgs e)
+        {
+            Calculate();
+        }
+
+    }
+}
