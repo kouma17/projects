@@ -1,0 +1,48 @@
+#include <iostream>
+
+int main()
+{
+	int number, x, num1, num2, num3, num4;
+	std::cout << "Enter a 4 digit number: ";
+	std::cin >> number;
+	do
+	{
+		do
+		{
+			if (10000 > number)
+			{
+				if (999 < number)
+				{
+					x = number % 10;
+					num1 = (number / 1000) % 10;
+					num2 = (number / 100) % 10;
+					num3 = (number / 10) % 10;
+					num4 = (number / 1) % 10;
+
+					std::cout << num1 << std::endl;
+					std::cout << num2 << std::endl;
+					std::cout << num3 << std::endl;
+					std::cout << num4 << std::endl;
+
+					return 0;
+				}
+				else
+				{
+					std::cout << "Re-enter a four digit number: ";
+					std::cin >> number;
+				}
+			}
+			else
+			{
+				std::cout << "Re-enter a four digit number: ";
+				std::cin >> number;
+			}
+		} while (10000 > number);
+	} while (999 < number);
+}
+
+// This program uses the "do-while" loop along with the "if-else" statement. There are two loops for the two inequalities
+//  involving "number". As such, there are two "if-else" statements for the inequalities as well.
+// The user inputs a number and if the number is above 9999, the first do-while loop starts. If the next number
+//  entered is below 1000, the loop starts again. The if-else statements will cause the user to re-enter a new number
+//  in between 1000<x<9999. If the condition is met, the number will be displayed by being divided by its place value.
