@@ -1,0 +1,88 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Lab2_Kou_Moua
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void btnRandom_Click(object sender, EventArgs e)
+        {
+            Random rand = new Random();
+            int test1, test2, test3, test4, test5, test6, test7, test8, test9, test10;
+            test1 = rand.Next(50, 101);
+            test2 = rand.Next(50, 101);
+            test3 = rand.Next(50, 101);
+            test4 = rand.Next(50, 101);
+            test5 = rand.Next(50, 101);
+            test6 = rand.Next(30, 101);
+            test7 = rand.Next(30, 101);
+            test8 = rand.Next(30, 101);
+            test9 = rand.Next(30, 101);
+            test10 = rand.Next(30, 101);
+            txtTestScore1.Text = test1.ToString();
+            txtTestScore2.Text = test2.ToString();
+            txtTestScore3.Text = test3.ToString();
+            txtTestScore4.Text = test4.ToString();
+            txtTestScore5.Text = test5.ToString();
+            txtTestScore6.Text = test6.ToString();
+            txtTestScore7.Text = test7.ToString();
+            txtTestScore8.Text = test8.ToString();
+            txtTestScore9.Text = test9.ToString();
+            txtTestScore10.Text = test10.ToString();
+        }
+
+        private void btnComputeStats_Click(object sender, EventArgs e)
+        {
+            double T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Ans, ans;
+            double.TryParse(txtTestScore1.Text, out T1);
+            double.TryParse(txtTestScore2.Text, out T2);
+            double.TryParse(txtTestScore3.Text, out T3);
+            double.TryParse(txtTestScore4.Text, out T4);
+            double.TryParse(txtTestScore5.Text, out T5);
+            double.TryParse(txtTestScore6.Text, out T6);
+            double.TryParse(txtTestScore7.Text, out T7);
+            double.TryParse(txtTestScore8.Text, out T8);
+            double.TryParse(txtTestScore9.Text, out T9);
+            double.TryParse(txtTestScore10.Text, out T10);
+            Ans = (T1 + T2 + T3 + T4 + T5 + T6 + T7 + T8 + T9 + T10) / 10;
+            txtBoxMean.Text = Ans.ToString();
+            ans = (((T1 - Ans) * (T1 - Ans) + (T2 - Ans) * (T2 - Ans) + (T3 - Ans) * (T3 - Ans) + (T4 - Ans) * (T4 - Ans) +
+                (T5 - Ans) * (T5 - Ans) + (T6 - Ans) * (T6 - Ans) + (T7 - Ans) * (T7 - Ans) +
+                (T8 - Ans) * (T8 - Ans) + (T9 - Ans) * (T9 - Ans) + (T10 - Ans) * (T10 - Ans)) / 10);
+            txtBoxStandDev.Text = Convert.ToString(Math.Sqrt(ans));
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtTestScore1.Text = "";
+            txtTestScore2.Text = "";
+            txtTestScore3.Text = "";
+            txtTestScore4.Text = "";
+            txtTestScore5.Text = "";
+            txtTestScore6.Text = "";
+            txtTestScore7.Text = "";
+            txtTestScore8.Text = "";
+            txtTestScore9.Text = "";
+            txtTestScore10.Text = "";
+            txtBoxMean.Text = "";
+            txtBoxStandDev.Text = "";
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+}
