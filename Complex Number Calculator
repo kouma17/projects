@@ -1,0 +1,185 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+
+namespace Lab7_Kou_Moua
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        string result;
+
+        private void btnAdd1_Click(object sender, EventArgs e)
+        {
+            int r1, r2, i1, i2;
+            int.TryParse(txtBoxReal1.Text, out r1);
+            int.TryParse(txtBoxReal2.Text, out r2);
+            int.TryParse(txtBoxImag1.Text, out i1);
+            int.TryParse(txtBoxImag2.Text, out i2);
+            lblSign.Text = "+";
+            lblAnswer.Text = ComplexMath.MathFunctions.Add(r1, i1, r2, i2);
+        }
+
+        private void btnSubtract1_Click(object sender, EventArgs e)
+        {
+            int r1, r2, i1, i2;
+            int.TryParse(txtBoxReal1.Text, out r1);
+            int.TryParse(txtBoxReal2.Text, out r2);
+            int.TryParse(txtBoxImag1.Text, out i1);
+            int.TryParse(txtBoxImag2.Text, out i2);
+            lblSign.Text = "-";
+            lblAnswer.Text = ComplexMath.MathFunctions.Subtract(r1, i1, r2, i2);
+        }
+
+        private void btnDivide1_Click(object sender, EventArgs e)
+        {
+            int r1, r2, i1, i2;
+            int.TryParse(txtBoxReal1.Text, out r1);
+            int.TryParse(txtBoxReal2.Text, out r2);
+            int.TryParse(txtBoxImag1.Text, out i1);
+            int.TryParse(txtBoxImag2.Text, out i2);
+            lblSign.Text = "/";
+            lblAnswer.Text = ComplexMath.MathFunctions.Divide(r1, i1, r2, i2);
+        }
+
+        private void btnMultiply1_Click(object sender, EventArgs e)
+        {
+            int r1, r2, i1, i2;
+            int.TryParse(txtBoxReal1.Text, out r1);
+            int.TryParse(txtBoxReal2.Text, out r2);
+            int.TryParse(txtBoxImag1.Text, out i1);
+            int.TryParse(txtBoxImag2.Text, out i2);
+            lblSign.Text = "*";
+            lblAnswer.Text = ComplexMath.MathFunctions.Multiply(r1, i1, r2, i2);
+        }
+
+        struct Results
+        {
+            public int RealNumber;
+            public int ImagNumber;
+        }
+
+        private void btnAdd2_Click(object sender, EventArgs e)
+        {
+            lstAnswers.Items.Clear();
+            var lines = File.ReadAllLines("Input.txt");
+            int size = lines.Count();
+            Results[] nums = new Results[size];
+            for (int i = 0; i < size; i++)
+            {
+                string line = lines[i];
+
+                string[] SecondNumber = line.Split(',');
+                int RealNum = int.Parse(SecondNumber[0]);
+                int ImageNum = int.Parse(SecondNumber[1]);
+
+                nums[i].RealNumber = RealNum;
+                nums[i].ImagNumber = ImageNum;
+            }
+            for (int i = 0; i < nums.Length; i += 2)
+            {
+                Results num1 = nums[i];
+                Results num2 = nums[i + 1];
+
+                result = ComplexMath.MathFunctions.Add(num1.RealNumber, num1.ImagNumber, num2.RealNumber, num2.ImagNumber);
+
+                lstAnswers.Items.Add(result);
+            }
+        }
+
+        private void btnSubtract2_Click(object sender, EventArgs e)
+        {
+            lstAnswers.Items.Clear();
+            var lines = File.ReadAllLines("Input.txt");
+            int size = lines.Count();
+            Results[] nums = new Results[size];
+            for (int i = 0; i < size; i++)
+            {
+                string line = lines[i];
+
+                string[] SecondNumber = line.Split(',');
+                int RealNum = int.Parse(SecondNumber[0]);
+                int ImageNum = int.Parse(SecondNumber[1]);
+
+                nums[i].RealNumber = RealNum;
+                nums[i].ImagNumber = ImageNum;
+            }
+            for (int i = 0; i < nums.Length; i += 2)
+            {
+                Results num1 = nums[i];
+                Results num2 = nums[i + 1];
+
+                result = ComplexMath.MathFunctions.Subtract(num1.RealNumber, num1.ImagNumber, num2.RealNumber, num2.ImagNumber);
+
+                lstAnswers.Items.Add(result);
+            }
+        }
+
+        private void btnDivide2_Click(object sender, EventArgs e)
+        {
+            lstAnswers.Items.Clear();
+            var lines = File.ReadAllLines("Input.txt");
+            int size = lines.Count();
+            Results[] nums = new Results[size];
+            for (int i = 0; i < size; i++)
+            {
+                string line = lines[i];
+
+                string[] SecondNumber = line.Split(',');
+                int RealNum = int.Parse(SecondNumber[0]);
+                int ImageNum = int.Parse(SecondNumber[1]);
+
+                nums[i].RealNumber = RealNum;
+                nums[i].ImagNumber = ImageNum;
+            }
+            for (int i = 0; i < nums.Length; i += 2)
+            {
+                Results num1 = nums[i];
+                Results num2 = nums[i + 1];
+
+                result = ComplexMath.MathFunctions.Divide(num1.RealNumber, num1.ImagNumber, num2.RealNumber, num2.ImagNumber);
+
+                lstAnswers.Items.Add(result);
+            }
+        }
+
+        private void btnMultiply2_Click(object sender, EventArgs e)
+        {
+            lstAnswers.Items.Clear();
+            var lines = File.ReadAllLines("Input.txt");
+            int size = lines.Count();
+            Results[] nums = new Results[size];
+            for (int i = 0; i < size; i++)
+            {
+                string line = lines[i];
+
+                string[] SecondNumber = line.Split(',');
+                int RealNum = int.Parse(SecondNumber[0]);
+                int ImageNum = int.Parse(SecondNumber[1]);
+
+                nums[i].RealNumber = RealNum;
+                nums[i].ImagNumber = ImageNum;
+            }
+            for (int i = 0; i < nums.Length; i += 2)
+            {
+                Results num1 = nums[i];
+                Results num2 = nums[i + 1];
+
+                result = ComplexMath.MathFunctions.Multiply(num1.RealNumber, num1.ImagNumber, num2.RealNumber, num2.ImagNumber);
+
+                lstAnswers.Items.Add(result);
+            }
+        }
+    }
+}
