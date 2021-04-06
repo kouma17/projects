@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+// Kou Moua CSI2290
+// This program will ask the user to input a number. The numbers will be inputted into a matrix code. The code adds the matrices.
+
+int main()
+{
+
+    int a[2][2], b[2][2], sumMatrix[2][2], i, j;
+    int c = 2, d = 2;                                // square matrix of size 2*2
+    printf("\nEnter elements of 1st matrix:\n");     // Matrix a
+    for (i = 0; i < c; ++i)                          // i only hold two numbers
+        for (j = 0; j < d; ++j)                      // j will hold two numbers
+        {
+            printf("a%d%d = ", i + 1, j + 1);        // will add 1 to either the i or j column (a11, a12, a21, a22)
+            scanf_s("%d", &a[i][j]);                 //  and the input number will correspond
+        }
+
+    printf("Enter elements of 2nd matrix:\n");       // Matrix b
+    for (i = 0; i < c; ++i)
+        for (j = 0; j < d; ++j)
+        {
+            printf("b%d%d = ", i + 1, j + 1);
+            scanf_s("%d", &b[i][j]);
+        }
+
+    // adding two matrices
+    for (i = 0; i < c; ++i)
+        for (j = 0; j < d; ++j)
+        {
+            sumMatrix[i][j] = a[i][j] + b[i][j];     // Will add a11 with b11, a12 with b12, etc.
+        }
+
+    // printing the result
+    printf("\nSum of two matrices: \n");
+    for (i = 0; i < c; ++i)
+        for (j = 0; j < d; ++j)
+        {
+            printf("%d   ", sumMatrix[i][j]);
+            if (j == d - 1)
+            {
+                printf("\n\n");
+            }
+        }
+
+    return 0;
+}
